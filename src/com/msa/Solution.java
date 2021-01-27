@@ -15,41 +15,37 @@ class Solution {
         nums1[curIdx] = newItem;
     }
 
+    void appendRest(int[] nums1, int fromNums, int[] rest, int fromRest){
+        int appIdx = fromNums;
+        for(int i = fromRest; i < rest.length; i++){
+            nums1[appIdx] = rest[i];
+            appIdx ++;
+        }
+    }
+
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int a = 0;
         int b = m - 1;
+        boolean endphase = false;
         System.out.println("here ye hear ye");
-        for(int n2 : nums2){
-//            System.out.println(n2);
-            if(b >= a){
-
-
-            while(true){
-                //                System.out.println(b);
-//                System.out.println(a);
-                System.out.println(String.format("%s, less than or eq %s?", b, a));
-                if(n2 >= nums1[a]){
-                    System.out.println("increment");
-                    a++;
-//                     break;
-                }else{
-                    System.out.println("does a shift");
+//        int curIdx = 0;
+//        int curNum = nums2[curIdx];
+        for(int i = 0; i<nums2.length;i++){
+            int n2 = nums2[i];
+            while(b >= a){
+                if(nums1[a]>n2){
                     this.shift(a,b,nums1,n2);
                     a++;
-                    b++;
-                    System.out.println("end of shift");
+                    b++;//may be +=2
                     break;
+                }else{
+                    a++;
                 }
-//                System.out.println(a);
-//                System.out.println(b);
-//                System.out.println(nums1[a]);
-//                System.out.println(n2);
             }
-            break;
+            if(b < a){
+                appendRest(nums1,a,nums2,i);
+                break;
             }
-            System.out.println("later increment");
-            nums1[a] = n2;
-            a++;
         }
     }
 }
