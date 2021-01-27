@@ -3,12 +3,12 @@ package com.climbingstairs;
 public class Solution {
     public int climbStairs(int n) {
         if(n<=2) return n;
-        int[] fib = new int[n];
-        fib[0] = 1;
-        fib[1] = 2;
-        for(int i = 2; i<=n-1;i++){
+        int[] fib = new int[n+1];
+        fib[1] = 1;
+        fib[2] = 2;
+        for(int i = 3; i<=n;i++){
             fib[i] = fib[i-1] + fib[i-2];
         }
-        return fib[n-1];
+        return fib[n];
     }
 }
